@@ -19,7 +19,7 @@ end
 % calculate the probability of corect or incorrect response for all the CSF
 % parameter space and the given frequency and contrast tested 
 S       = csf(T.p_f,T.gamma,T.delta,T.bw,freqTested);
-pOBS    = weibullPsych(S,contrastTested,PARAMS_SELECT.epsilon,PARAMS_SELECT.steepnes);
+pOBS    = weibullPsych(S,contrastTested,PARAMS_SELECT.epsilon,PARAMS_SELECT.steepnes,PARAMS_SELECT.chance);
 
 if correct == 0
     pOBS = 1-pOBS;
@@ -59,7 +59,7 @@ posterior           = prior.*pOBS2./pData;
 %                 PARAMS_RANGE.deltaRange(d),...
 %                 PARAMS_RANGE.betaRange(b),...
 %                 nextFreqToTest);
-%                 pOBStest(f,g,d,b) = weibullPsych(S,nextContrastToTest,PARAMS_SELECT.epsilon,PARAMS_SELECT.steepnes);
+%                 pOBStest(f,g,d,b) = weibullPsych(S,nextContrastToTest,PARAMS_SELECT.epsilon,PARAMS_SELECT.steepnes,PARAMS_SELECT.chance);
 %             end
 %         end
 %     end

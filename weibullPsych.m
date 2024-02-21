@@ -1,3 +1,3 @@
-function p = weibullPsych(S,valuesToTest,epsilon,steepnes)
+function p = weibullPsych(S,valuesToTest,epsilon,steepnes,chance)
 
-p = 0.5+(1-0.5-epsilon/2).*(1-exp(-(valuesToTest./(1./10.^S)).^steepnes));
+p = chance+(1-chance-epsilon/2).*(1-exp(-(valuesToTest./(1./10.^S)).^steepnes));

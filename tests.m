@@ -44,6 +44,7 @@ PARAMS.RANGE.betaRange      = logspace(log10(1),log10(9),PARAMS.RANGE.betaN);
 
 % how to select next stimuli parameters
 PARAMS.SELECT.epsilon     = 0.04;   % stimulus independe error or lapses 1-epsilon is the max performance
+PARAMS.SELECT.chance      = 0.25;   % lower bound of the psychometric function, in a n-AFC task correspond to 1/n
 PARAMS.SELECT.steepnes    = 3;      % the steepnes/slope of the Weibull psychometric function, it is assumed to be similar for all frequencies and observers, which might be wrong, values used are between 2 and 3.5
 PARAMS.SELECT.NSamples    = 500;    % sampling of the posterior to evaluate next stimuli
 PARAMS.SELECT.unifDecile  = .1;     % instead of selecting the stimuli that gives the max expected information gain, the slection is a random selection between the unifDecile of stimuli (this is just mentioned in Lesmes et al, p14)
@@ -58,9 +59,9 @@ plotPriors  = 1;    % check that prior are symmetric
 [prior]     = priorCSF(PARAMS.PRIOR_GUESS,PARAMS.RANGE,plotPriors);
 
 % the csf to find in this 'experiment'
-gamma       = 150;
-p_f         = 3;
-bw          = 2;
+gamma       = 100;
+p_f         = 2;
+bw          = 1.5;
 delta       = 1;
 [S]         = csf(p_f,gamma,delta,bw,PARAMS.RANGE.freqRange);
 
@@ -103,7 +104,7 @@ set(ax3,'XTick',log10(xticks3),'XTickLabel',xticks3,...
     'YTick',log10(yticks3),'YTickLabel',yticks3)
 
 %%
-nTrials = 50; % number of trials
+nTrials = 70; % number of trials
 lcolor = [0 1 0 .1];
 
 for tt = 1:nTrials
@@ -114,7 +115,7 @@ for tt = 1:nTrials
     % correct or incorrect according to the csf defined above and the
     % weibull psychometric function
     [St]        = csf(p_f,gamma,delta,bw,nextFreqToTest);
-    p           = weibullPsych(St,nextContrastToTest,PARAMS.SELECT.epsilon ,PARAMS.SELECT.steepnes);
+    p           = weibullPsych(St,nextContrastToTest,PARAMS.SELECT.epsilon ,PARAMS.SELECT.steepnes,PARAMS.SELECT.chance);
     correct     = rand(1)<p;
      
     % update prior

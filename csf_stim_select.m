@@ -18,7 +18,7 @@ for ff = 1:length(freqToTest)
                 PARAMS_RANGE.deltaRange(Dix(nn)),...
                 PARAMS_RANGE.betaRange(Bix(nn)),...
                 freqToTest(ff));
-            p(nn) = weibullPsych(S,contrastToTest(cc),PARAMS_SELECT.epsilon,PARAMS_SELECT.steepnes);
+            p(nn) = weibullPsych(S,contrastToTest(cc),PARAMS_SELECT.epsilon,PARAMS_SELECT.steepnes,PARAMS_SELECT.chance);
         end
 
         % Calculate information gain
