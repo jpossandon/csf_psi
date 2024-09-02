@@ -19,7 +19,7 @@ function [S] = csf(p_f,gamma,delta,bw,spatFreq)
 %%
 
 kappa   = 4./log10(2);
-S    = log10(gamma)-kappa.*((log10(spatFreq./p_f))./bw).^2; %log parabola
+S       = log10(gamma)-kappa.*((log10(spatFreq./p_f))./bw).^2; %log parabola
 
 if length(spatFreq)>=1 & length(p_f)==1
     S(spatFreq <p_f & S<log10(gamma)-delta) = log10(gamma)-delta; % truncation
