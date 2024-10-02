@@ -15,3 +15,6 @@ yticks = [1 5 10 50 100 200];
 ahandle = gca;
 set(ahandle,'XTick',log2(xticks),'XTickLabel',xticks,...
     'YTick',log10(yticks),'YTickLabel',yticks)
+xlabel('Spatial frequency cyc/deg')
+ylabel('Sensitivity')
+title('CSF truncated log-parabola model')
